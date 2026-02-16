@@ -1,72 +1,77 @@
 {
-  "name": "bs58check",
-  "version": "4.0.0",
-  "description": "A straightforward implementation of base58-check encoding",
-  "type": "module",
-  "keywords": [
-    "base",
-    "base58",
-    "base58check",
-    "bitcoin",
-    "bs58",
-    "check",
-    "checksum",
-    "decode",
-    "decoding",
-    "encode",
-    "encoding",
-    "litecoin"
-  ],
-  "homepage": "https://github.com/bitcoinjs/bs58check",
-  "bugs": {
-    "url": "https://github.com/bitcoinjs/bs58check/issues"
-  },
-  "license": "MIT",
-  "author": "Daniel Cousens",
-  "files": [
-    "src"
-  ],
-  "main": "src/cjs/index.cjs",
-  "module": "src/esm/index.js",
-  "types": "src/cjs/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./src/cjs/index.cjs",
-      "import": "./src/esm/index.js",
-      "types": "./src/cjs/index.d.ts"
+    "name": "@btc-vision/bs58check",
+    "type": "module",
+    "version": "5.0.0",
+    "description": "A straightforward implementation of base58-check encoding",
+    "engines": {
+        "node": ">=24.0.0"
+    },
+    "exports": {
+        ".": {
+            "types": "./build/index.d.ts",
+            "import": "./build/index.js",
+            "default": "./build/index.js"
+        },
+        "./base": {
+            "types": "./build/base.d.ts",
+            "import": "./build/base.js",
+            "default": "./build/base.js"
+        }
+    },
+    "keywords": [
+        "base",
+        "base58",
+        "base58check",
+        "bitcoin",
+        "bs58",
+        "check",
+        "checksum",
+        "decode",
+        "decoding",
+        "encode",
+        "encoding",
+        "litecoin"
+    ],
+    "homepage": "https://github.com/btc-vision/bs58check",
+    "bugs": {
+        "url": "https://github.com/btc-vision/bs58check/issues"
+    },
+    "license": "MIT",
+    "author": "Daniel Cousens",
+    "files": [
+        "build"
+    ],
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "module": "build/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/btc-vision/bs58check.git"
+    },
+    "scripts": {
+        "build": "eslint src && tsc",
+        "clean": "rimraf build",
+        "test": "npm run build && vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "npm run build && vitest run --coverage",
+        "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+        "format:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
+        "lint": "eslint src",
+        "typecheck": "tsc --noEmit",
+        "prebuild": "npm run clean"
+    },
+    "dependencies": {
+        "@noble/hashes": "^2.0.1",
+        "bs58": "^6.0.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.39.2",
+        "@types/node": "^25.2.3",
+        "eslint": "^9.39.2",
+        "prettier": "^3.5.3",
+        "rimraf": "^6.1.3",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.55.0",
+        "vitest": "^4.0.18"
     }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bitcoinjs/bs58check.git"
-  },
-  "scripts": {
-    "build": "npm run clean && tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
-    "clean": "rimraf src",
-    "gitdiff": "npm run build && git diff --exit-code",
-    "postbuild": "chmod +x ./fixup.sh && ./fixup.sh",
-    "coverage-report": "c8 report --reporter=lcov",
-    "coverage": "c8 --check-coverage --branches 90 --functions 90 npm run unit",
-    "standard": "ts-standard --ignore test --ignore src",
-    "test": "npm run standard -- --fix && npm run coverage",
-    "unit": "tape test/*.js"
-  },
-  "dependencies": {
-    "@eslint/js": "^9.39.2",
-    "@noble/hashes": "^2.0.1",
-    "@typescript-eslint/utils": "^8.55.0",
-    "bs58": "^6.0.0",
-    "eslint": "^9.39.2"
-  },
-  "devDependencies": {
-    "@types/node": "^25.2.3",
-    "blake-hash": "^2.0.0",
-    "c8": "^10.1.3",
-    "rimraf": "^6.1.3",
-    "safe-buffer": "^5.2.1",
-    "standard": "^17.1.2",
-    "tape": "^5.9.0",
-    "ts-standard": "^12.0.2",
-    "typescript": "^5.9.3"
-  }
 }
